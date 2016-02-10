@@ -8,6 +8,7 @@ node_modules/
 .sass-cache
 .idea/
 .npm-debug.log
+/sources/libraries
 
 ## Karma
 /reports/
