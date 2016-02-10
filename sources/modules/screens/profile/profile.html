@@ -1,0 +1,17 @@
+<link href="css/login/login.css" rel="stylesheet">
+
+<form name="formChangePassword" class="form-signin">
+  <h2 class="form-signin-heading">Gestion de votre profil</h2>
+  <div class="trophies">
+    <h3>Trophées</h3>
+    <span class="col-md-12" ng-repeat="trophy in trophies">
+      <div ng-class="{'achieved':trophy.IsAchieved}">
+        {{trophy.Name}} : {{trophy.Description}}
+      </div>
+    </span>
+  </div>
+  <div>
+    <h3>Gestion mot de passe</h3>
+    <a href="#/change_password">Changer mon mot de passe</a>
+  </div>
+</form>

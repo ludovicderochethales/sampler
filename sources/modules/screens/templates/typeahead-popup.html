@@ -1,0 +1,8 @@
+<ul class="dropdown-menu" ng-show="isOpen() && !moveInProgress" ng-style="{top: position().top+'px', left: position().left+'px'}" style="display: block;" role="listbox" aria-hidden="{{!isOpen()}}">
+    <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+        <div uib-typeahead-match index="$index" match="match" query="query">
+          <a href tabindex="-1" ng-bind-html="match.label | uibTypeaheadHighlight:query"></a>
+        </div>
+        <span class="fa {{match.model.IsFavorite ? 'fa-star' : 'fa-star-o'}}" ng-click="$parent.$parent.$parent.$parent.callFavorite(match.model);$event.stopPropagation()"></span>
+    </li>
+</ul>

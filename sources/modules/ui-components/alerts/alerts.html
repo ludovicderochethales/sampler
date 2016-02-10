@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row alert-container">
+    <div class="alert-subcontainer">
+      <uib-alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="{{alert.timeout}}" template-url="views/templates/alert.html">
+        <img class="img-responsive alert-img" ng-if="alert.image" ng-src="{{alert.image}}">
+        <span>{{alert.msg}}</span>
+      </uib-alert>
+    </div>
+  </div>
+</div>

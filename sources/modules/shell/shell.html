@@ -1,0 +1,89 @@
+<section id="shell" class="shell">
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" ng-click="shell.isCollapsed = !shell.isCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      <span class="navbar-buttons-mobile" ng-if="shell.user">
+        <a class="visible-xs-inline-block" href="#" class="hidden-xs" ng-click="shell.logout(); $event.preventDefault()"><span class="fa fa-sign-out" title="Déconnexion"></span></a>
+        <a class="visible-xs-inline-block mute-mobile" href="#" ng-click="shell.mute(); $event.preventDefault()"><span class="glyphicon {{shell.isMuted ? 'glyphicon-volume-off' : 'glyphicon-volume-up'}}" title="{{shell.isMuted ? 'Activer le son' : 'Couper le son'}}"></span></a>
+      </span>
+          <a class="navbar-brand" href="#">
+            <span class="hidden-xs">Samplère v2.0</span>
+            <img class="img-responsive visible-xs-inline-block" src="img/sampler_logo.png">
+          </a>
+          <div ng-if="shell.user" class="visible-xs-inline-block navbar-form form-group has-feedback form-search form-search-mobile">
+            <input id="search" type="search" class="form-control" placeholder="Rechercher un son..."
+                   uib-typeahead="sound.Name for sound in shell.soundList | filter:{Name:$viewValue}"
+                   typeahead-on-select="shell.callSound($item)" autocomplete="off" ng-model="shell.search.query" autofocus="true"
+                   typeahead-popup-template-url="views/templates/typeahead-popup.html">
+            <button id="clearButton" type="button" class="close form-control-feedback" title="Effacer" ng-click="shell.clear()"><span aria-hidden="true">&times;</span></button>
+          </div>
+        </div>
+        <div id="navbar" uib-collapse="shell.isCollapsed" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li ng-class="{active: shell.isCurrentPage('') || shell.stateContains('app.sounds')}">
+              <a href="#">
+                <span class="text">Accueil</span>
+                <span class="glyphicon glyphicon-home" title="Accueil"></span>
+              </a>
+            </li>
+            <li ng-class="{active: shell.stateContains('app.favorites')}">
+              <a href="#/favorites">
+                <span class="text">Favoris</span>
+                <span class="glyphicon glyphicon-star" title="Favoris"></span>
+              </a>
+            </li>
+            <li ng-class="{active: shell.stateContains('app.about')}">
+              <a href="#/about">
+                <span class="text">À propos</span>
+                <span class="glyphicon glyphicon-info-sign" title="À propos"></span>
+              </a>
+            </li>
+            <li ng-if="user" class="visible-xs-block" ng-class="{active: shell.stateContains('app.profile')}">
+              <a href="#/profile">
+                <span class="text">Profil</span>
+              </a>
+            </li>
+            <li><a href="#" class="hidden-xs btn-mute" ng-if="shell.user" ng-click="shell.mute(); $event.preventDefault()"><span class="glyphicon {{shell.isMuted ? 'glyphicon-volume-off' : 'glyphicon-volume-up'}}" title="{{shell.isMuted ? 'Activer le son' : 'Couper le son'}}"></span></a></li>
+          </ul>
+          <div ng-if="shell.user" class="hidden-xs col-md-4 col-sm-6 navbar-form form-group has-feedback form-search">
+            <input id="search" type="search" class="form-control" placeholder="Rechercher un son..."
+                   uib-typeahead="sound.Name for sound in shell.soundList | filter:({Name:$viewValue}):shell.ignoreAccents"
+                   typeahead-on-select="shell.callSound($item)" autocomplete="off" ng-model="shell.search.query" autofocus="true"
+                   typeahead-popup-template-url="views/templates/typeahead-popup.html">
+            <button id="clearButton" type="button" class="close form-control-feedback" title="Effacer" ng-click="shell.clear()"><span aria-hidden="true">&times;</span></button>
+          </div>
+          <ul class="nav navbar-nav right hidden-xs">
+            <li ng-if="user" ng-class="{active: shell.stateContains('app.profile')}">
+              <a href="#/profile">
+                <span class="text">Profil</span>
+                <span class="fa fa-key" title="Profil"></span>
+              </a>
+            </li>
+            <li ng-if="shell.user">
+              <a href="#" class="hidden-xs" ng-click="shell.logout(); $event.preventDefault()">
+                <span class="text">Déconnexion</span>
+                <span class="fa fa-sign-out" title="Déconnexion"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- View content -->
+  <div class="main-container col-xs-12 col-sm-8 col-md-offset-1 col-md-8" ui-view></div>
+
+  <!-- Spinner -->
+  <div ui-loading="shell.isLoading"></div>
+
+</section>

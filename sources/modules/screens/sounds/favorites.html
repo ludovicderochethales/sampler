@@ -1,0 +1,4 @@
+<div class="buttons">
+  <span class="col-xs-6 col-sm-3 col-md-2" ng-repeat="sound in shell.soundList | filter:{IsFavorite:true} | filter:({Name:shell.search.query}):shell.ignoreAccents" ng-include src="'modules/screens/templates/sounds_list.html'">
+  </span>
+</div>

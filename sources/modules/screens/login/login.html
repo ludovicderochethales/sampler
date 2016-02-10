@@ -1,0 +1,10 @@
+<link href="css/login/login.css" rel="stylesheet">
+
+<form name="formLogin" class="form-signin">
+  <h2 class="form-signin-heading">Veuillez vous authentifier</h2>
+  <input type="text" ng-model="login" class="form-control"
+         placeholder="Identifiant" required autofocus>
+  <input type="password" ng-model="password" class="form-control"
+         placeholder="Mot de passe" required>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="doLogin()" ng-disabled="formLogin.$invalid">S'authentifier</button>
+</form>
